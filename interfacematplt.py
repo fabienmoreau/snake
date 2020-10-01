@@ -1,28 +1,29 @@
 import matplotlib.pyplot as plt
 import time
 import pygame
+import msvcrt
 
-black = (0, 0, 0)
-white = (255, 255, 255)
-red = (255, 0, 0)
+class InterfaceMatPlt:
 
-edge = 1
-width = 10
-length = 15
-X=[0,2]
-Y=[15,11]
-i=15
-
-class Interfacematplt:
-
-    def __init__(self, width, length):
+    def __init__(self, width, length, markersize):
+        self.width = width
+        self.length = length
+        self.markersize = markersize
         self.axis = plt.axis([0,width, 0, length])
 
-    def clear_dots(self):
-        plt.clf()
-    
+    def change_direction(self, game):
+        input_char = msvcrt.getch()
+        if str(input_char.upper())[2] == 'Z': 
+            game.direction = 'DOWN'
+        if str(input_char.upper())[2] == 'S': 
+            game.direction = 'UP'
+        if str(input_char.upper())[2] == 'Q': 
+            game.direction = 'LEFT'
+        if str(input_char.upper())[2] == 'D': 
+            game.direction = 'RIGHT'
+
     def refresh(self, snake, game, speed):
-        
+        plt.clf()
         X_snake=[]
         Y_snake=[]
         for square in snake.body:
@@ -30,24 +31,12 @@ class Interfacematplt:
             Y_snake.append(square[1])
         X_ball = [game.new_ball[0]]
         Y_ball = [game.new_ball[1]]
-        plt.plot(X_snake, Y_snake,'s', color='black', markersize=30)
-        plt.plot(X_ball, Y_ball,'s', color='red', markersize=30)
-        plt.axis([0,15, 0, 20])
+        plt.plot(X_snake, Y_snake,'s', color='black', markersize=self.markersize)
+        plt.plot(X_ball, Y_ball,'s', color='red', markersize=self.markersize)
+        plt.axis([0,self.width, 0, self.length])
         
         plt.draw()
-        speed=0.0009*speed
+        speed=0.0001*speed
         plt.pause(speed)
         
 
-"""
-while i>0: 
-    plt.clf()
-    plt.plot(X, Y,'s', color='black', markersize=30)
-    plt.axis([0,width, 0, length])
-
-    plt.draw()
-    plt.pause(1)
-    print(Y)
-    Y[0]+= -1
-    i+= -1
-"""

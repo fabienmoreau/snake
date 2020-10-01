@@ -1,14 +1,13 @@
 import pygame 
-black = (0, 0, 0)
-white = (255, 255, 255)
-red = (255, 0, 0)
 
 class InterfacePy:
 
-    def __init__(self, pix_width, pix_length, edge):
+    def __init__(self, pix_width, pix_length, edge, grey, red):
         self.edge = edge
         self.pix_length = pix_length
         self.pix_width = pix_width
+        self.grey = grey
+        self.red = red
         self.screen = pygame.display.set_mode((pix_width, pix_length))
 
         self.dict_rotation = dict()
@@ -24,29 +23,29 @@ class InterfacePy:
 
         self.rect_border_l = pygame.Rect((0,0),(self.edge,self.pix_length))
         self.image_border_l = pygame.Surface((self.edge,self.pix_length))
-        self.image_border_l .fill(white)
+        self.image_border_l .fill(self.grey)
 
         self.rect_border_r = pygame.Rect((self.pix_width-self.edge,0),(self.pix_width-self.edge,self.pix_length))
         self.image_border_r = pygame.Surface((self.edge,self.pix_length))
-        self.image_border_r .fill(white)
+        self.image_border_r .fill(self.grey)
 
         self.rect_border_up = pygame.Rect((self.edge,0),(self.edge,self.edge))
         self.image_border_up = pygame.Surface((self.pix_width-2*self.edge,self.edge))
-        self.image_border_up .fill(white)
+        self.image_border_up .fill(self.grey)
 
         self.rect_border_down = pygame.Rect((self.edge,self.pix_length-self.edge),(self.pix_width-self.edge,self.pix_length))
         self.image_border_down = pygame.Surface((self.pix_width-2*self.edge,self.edge))
-        self.image_border_down .fill(white)
+        self.image_border_down .fill(self.grey)
 
         self.image_new_ball = pygame.Surface((self.edge, self.edge))
-        self.image_new_ball .fill(red)  
+        self.image_new_ball .fill(self.red)  
 
         self.image_head = pygame.image.load("head_snake.png")
         self.image_body = pygame.image.load("body_snake.png")
+        
 
 
     def refresh(self, snake, game):
-        
         self.screen.blit(self.image_border_l, self.rect_border_l)
         self.screen.blit(self.image_border_r, self.rect_border_r)
         self.screen.blit(self.image_border_up, self.rect_border_up)        
@@ -68,4 +67,20 @@ class InterfacePy:
                 self.screen.blit(self.image_body, rect)
 
         pygame.display.update()  
+
+
+
+    def change_direction(self, event, game):
+        if event.key == pygame.K_DOWN or event.key == pygame.K_UP or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+
+            if event.key == pygame.K_DOWN and game.direction != 'UP':
+                game.direction = 'DOWN'
+            elif event.key == pygame.K_UP and game.direction != 'DOWN':
+                game.direction = 'UP'
+            elif event.key == pygame.K_LEFT and game.direction != 'RIGHT':
+                game.direction = 'LEFT'
+            elif event.key == pygame.K_RIGHT and game.direction != 'LEFT':
+                game.direction = 'RIGHT'
+
+                   
     
