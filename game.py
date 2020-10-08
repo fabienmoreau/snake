@@ -9,11 +9,8 @@ import msvcrt
 import sys
 
 #GAME PARAMETERS
-pix_width = 600
-pix_length = 800
-pix_edge = 40
 markersize = 10
-width = 15
+width = 20
 length = 20
 speed = 300
 
@@ -73,6 +70,9 @@ if __name__ == '__main__':
     pygame.init()
 
     if param == 'pygame':
+        pix_edge = 40
+        pix_width = width*pix_edge
+        pix_length = length*pix_edge
         interface = InterfacePy(pix_width,pix_length,pix_edge, grey, red)
 
     if param == 'matpltlib':
@@ -95,8 +95,6 @@ if __name__ == '__main__':
                 game.get_started()
             interface.change_direction(game)
             
-        
-                
         if game.playing == True and (pygame.time.get_ticks()-game.time > speed):
 
             game.time = pygame.time.get_ticks()
