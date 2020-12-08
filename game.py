@@ -2,7 +2,6 @@ from interfacematplt import InterfaceMatPlt
 import matplotlib.pyplot as plt
 import pygame
 import random
-from square import Square
 from snake import Snake
 from interfacepy import InterfacePy
 import msvcrt

@@ -1,6 +1,5 @@
 import pygame
 import random
-from square import Square
 edge = 40
 
 class Snake:
