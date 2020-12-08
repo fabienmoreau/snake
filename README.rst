@@ -1,3 +1,5 @@
+Execute 'poetry install' to get your dependencies.
+
 How to run the game ?
 
 You have to call the game.py to run the game. You also need to specify your graphical interface (pygame or matpltlib). Example: (in your shell)
